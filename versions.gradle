@@ -1,0 +1,12 @@
+ext {
+    versions = [
+            'testContainers' : '1.17.6',
+            'springdoc' : '2.0.4',
+            'jaxbApi' : '2.3.1',
+            'lombok' : '1.18.26',
+            'mapstruct' : '1.5.3.Final',
+            'jacksonDataType' : '2.15.0-rc3',
+            'javaxPersistence' : '1.0.2.Final',
+            'restdoc' : 'v0.4.6'
+    ]
+}

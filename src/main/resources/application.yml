@@ -1,0 +1,45 @@
+server:
+  port: ${PORT:8082}
+
+spring:
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/changelog-master.xml
+
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:shary}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+
+app:
+  messages:
+    link:
+      profile: http://188.120.236.252:8083 (заглушка, тут должна быть ссылка на форму добавления данных в профиль)
+    errors:
+      entity:
+        update: Error while updating data (there may be errors in the name of the fields or the type of their value)
+      user:
+        by-id-not-found: User with id %s not found
+        by-email-not-found: User with email %s not found
+      category:
+        by-name-not-found: Category with name %s not found
+        by-id-not-found: Category with id %s not found
+      subcategory:
+        by-name-not-found: Subcategory with name %s not found
+        by-id-not-found: Subcategory with id %s not found
+      item:
+        by-id-not-found: Item with id %s not found
+        not-available: Item %s is already rented out
+        verification-failed: Item %s failed verification
+      order:
+        by-id-not-found: Order with id %s not found

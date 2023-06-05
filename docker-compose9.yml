@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  core-api:
+    image: 'core-api:latest'
+    build:
+      context: .
+    ports:
+      - "8082:8082"
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/shary
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    volumes:
+      - ./src/main/resources:/var
+  db:
+    image: postgres:13.3
+    container_name: shary-db
+    environment:
+      POSTGRES_DB: "shary"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    restart: always
+    ports:
+      - "5433:5432"

@@ -1,0 +1,92 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="2023-03-12-2-create-table-items" author="blckrbbit">
+        <createTable tableName="items">
+
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+
+            <column name="name" type="varchar(120)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="serial_number" type="varchar(200)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="photo" type="bytea">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="video" type="bytea">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="description" type="clob">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="verified" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="is_extend_lease" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="price" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="category_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="subcategory_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="order_id" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="owner_phone" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="renter_phone" type="varchar(20)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="characteristics" type="jsonb">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="item_data_for_rent" type="jsonb">
+                <constraints nullable="true"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="items" baseColumnNames="category_id"
+                                 constraintName="fk_items_categories"
+                                 referencedTableName="categories" referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint baseTableName="items" baseColumnNames="subcategory_id"
+                                 constraintName="fk_items_subcategories"
+                                 referencedTableName="subcategories" referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint baseTableName="items" baseColumnNames="order_id"
+                                 constraintName="fk_items_orders"
+                                 referencedTableName="orders" referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+
+</databaseChangeLog>

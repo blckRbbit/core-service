@@ -1,0 +1,74 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="2023-03-13-2-create-table-orders" author="blckrbbit">
+        <createTable tableName="orders">
+
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+
+            <column name="renter_phone" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="status" type="varchar(30)" defaultValue="NONE">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="creation" type="timestamp without time zone" >
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated" type="timestamp without time zone">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="active" type="boolean" defaultValue="true">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="is_agree_with_full_deposit" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="rent_start" type="timestamp without time zone">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="rent_end" type="timestamp without time zone">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="full_price" type="varchar(10)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="is_renter_new" type="boolean" defaultValue="true">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="is_prepayment_get" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="is_need_courier" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="delivery" type="jsonb">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="orders" baseColumnNames="renter_id"
+                                 constraintName="fk_orders_renter"
+                                 referencedTableName="users" referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+
+    </changeSet>
+</databaseChangeLog>

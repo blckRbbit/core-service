@@ -1,0 +1,35 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="2023-03-13-2-create-table-subcategories" author="blckrbbit">
+
+        <createTable tableName="subcategories">
+
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+
+            <column name="category_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="name" type="varchar(120)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="image" type="bytea">
+                <constraints nullable="true"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="subcategories" baseColumnNames="category_id"
+                                 constraintName="fk_subcategories_categories"
+                                 referencedTableName="categories" referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+
+    </changeSet>
+</databaseChangeLog>
